@@ -19,4 +19,5 @@ const goToProfile = () => {
 </template>
 
 <style scoped>
+
 </style>
