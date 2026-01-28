@@ -1,9 +1,11 @@
-import axios from "axios";
+import axios from 'axios'
 
-export default axios.create({
-  baseURL: 'https://morpion-api.edu.netlor.fr/',
+const api = axios.create({
+  baseURL: 'https://morpion-api.edu.netlor.fr',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'ma_super_api_key'
+    'Authorization': 'key=6i.;Kz>[<kd-'
   }
-});
+})
+
+export default api
