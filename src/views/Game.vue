@@ -1,8 +1,11 @@
 <script setup>
+
 </script>
 
 <template>
-  <router-view/>
+  <h1>Game</h1>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
