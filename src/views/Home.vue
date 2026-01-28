@@ -1,5 +1,18 @@
 <script setup>
-
+window.addEventListener('load', () => {
+  Vue.createApp({
+    components: {
+    },
+    data() {
+      return {
+      }
+    },
+    computed: {
+    },
+    methods:{
+    }
+  }).mount('#app')
+})
 </script>
 
 <template>
