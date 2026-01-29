@@ -21,7 +21,6 @@ export default {
       api.post('/api/games')
         .then((response) => {
           this.gameId = response.data['id']
-          console.log(this.gameId)
           alert('Partie créée')
           this.$router.push({ name: 'game', params: { id: this.gameId } })
         })
