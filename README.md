@@ -3,9 +3,9 @@
 ### BENA Hugo
 ### DWM1
 
-## Project Setup
+## Créer un dossier .env avec votre clef api (se référer au dossier .example
 
-### Créer un dossier .env avec votre clef api (se référer au dossier .example
+## Project Setup
 
 ```sh
 npm install
