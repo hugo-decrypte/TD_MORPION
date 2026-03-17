@@ -1,6 +1,7 @@
 # Morpion
-## LEVEQUE Tuline
-## BENA Hugo
+### LEVEQUE Tuline
+### BENA Hugo
+### DWM1
 
 ## Project Setup
 
