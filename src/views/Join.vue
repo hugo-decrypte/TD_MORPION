@@ -8,14 +8,7 @@
         <input type="text" id="code" v-model="gameCode" placeholder="Entrez le code de la partie" required/>
       </div>
 
-      <!-- gestion erreurs -->
-      <div v-if="errors.length" class="errors">
-        <ul>
-          <li v-for="(error, index) in errors" :key="index">
-            {{ error }}
-          </li>
-        </ul>
-      </div>
+      <ErrorDisplay :errors="errors" />
 
       <button type="submit">Rejoindre</button>
     </form>
@@ -26,8 +19,12 @@
 
 <script>
 import api from '../api/index.js'
+import ErrorDisplay from '../views/ErrorDisplay.vue'
 
 export default {
+  components: {
+    ErrorDisplay
+  },
   data() {
     return {
       gameCode: '',
@@ -39,18 +36,18 @@ export default {
     joinGame() {
       this.errors = []
 
-      api.post(`/api/games/${this.gameCode}/join`)
+      api.patch(`/api/games/${this.gameCode}/join`)
         .then((response) => {
           const gameId = response.data.id
           this.$router.push({ name: 'game', params: { id: gameId } })
         })
         .catch(error => {
           if (error.response && error.response.data.errors) {
-            this.errors = error.response.data.errors
+            this.errors = Object.values(error.response.data.errors).flat()
           } else if (error.response && error.response.status === 404) {
-            this.errors = ['Code de partie invalide']
+            this.errors = ['Ce code de partie n\'existe pas']
           } else {
-            this.errors = ['Une erreur est survenue']
+            this.errors = ['Erreur lors de la connexion au serveur']
           }
         })
     }
@@ -59,8 +56,6 @@ export default {
 </script>
 
 <style scoped>
-
-
 .container {
   background-color: #21242a;
   min-height: 100vh;
@@ -96,31 +91,13 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
-label {
-  font-weight: 600;
-  color: #21242a;
-  font-size: 1rem;
-}
+label { font-weight: 600; color: #21242a; font-size: 1rem; }
 
 input {
   padding: 0.8rem;
   font-size: 1rem;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
-}
-
-.errors {
-  background-color: #fee;
-  border: 1px solid #fcc;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
-
-.errors ul {
-  margin: 0;
-  padding-left: 1.5rem;
-  color: #c00;
 }
 
 button {
@@ -142,16 +119,7 @@ button:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-button:active {
-  transform: translateY(0);
-}
-
-.back-link {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  transition: opacity 0.3s ease;
-}
+.back-link { color: white; text-decoration: none; font-size: 1rem; }
 
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-30px);}
@@ -162,5 +130,4 @@ button:active {
   from { opacity: 0; transform: translateY(30px);}
   to { opacity: 1; transform: translateY(0);}
 }
-
 </style>

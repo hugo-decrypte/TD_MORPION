@@ -72,7 +72,6 @@ h1 {
   animation: fadeInUp 1s ease;
 }
 
-/* Style commun pour les boutons et les router-links */
 button,
 router-link,
 .boutons a {
